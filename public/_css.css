@@ -1,0 +1,230 @@
+/* All Device */
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+body {
+  font-family: 'Apple SD Gothic Neo', 'Nanum Gothic', sans-serif;
+}
+.hidden {
+  display: none;
+}
+.floor {
+  margin-top: 5px;
+}
+.center {
+  text-align: center;
+}
+.btn-danger:hover {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+.btn-success:hover {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+.btn:focus,
+.btn:hover,
+.btn:active,
+.btn:active:focus {
+  outline: unset;
+}
+.right {
+  float: right;
+}
+/* Mobile Device */
+#floor {
+  ime-mode: disabled;
+}
+#btn-manage {
+  margin-left: 10px;
+}
+#submit_btn {
+  width: 98%;
+  margin: 0 auto;
+}
+.container {
+  width: 100%;
+  padding: 0;
+}
+header {
+  padding: 25px 0 18px;
+  background-color: #00bcd4;
+  color: white;
+}
+header div {
+  width: 90%;
+  padding: 0 5px;
+  margin: 0 auto;
+}
+header div button {
+  vertical-align: middle;
+}
+header div p {
+  font-size: 26px;
+  margin: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+.form {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.form .form-control {
+  margin-bottom: 10px;
+  display: inline-block;
+}
+.form input:nth-child(3) {
+  display: none;
+}
+.contents tr {
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+}
+.contents tr td {
+  line-height: inherit;
+  padding: 0;
+}
+.contents tr td:first-child {
+  width: 18%;
+}
+.contents tr td:nth-child(2) {
+  padding-left: 2%;
+  width: 35%;
+  text-align: left;
+}
+.contents tr td:nth-child(3) {
+  width: 20%;
+}
+.contents tr td:nth-child(4) {
+  display: none;
+}
+.contents tr td:nth-child(5) {
+  width: auto;
+}
+.today_doc {
+  margin: 20px 0;
+}
+.list_title {
+  font-size: 20px;
+  display: inline-block;
+  margin: 0 0 10px 10px;
+  font-weight: bold;
+  color: #737373;
+}
+.manage_title {
+  font-size: 20px;
+  color: black;
+  margin-top: 20px;
+}
+.removable {
+  text-align: center;
+  font-size: 15px;
+  color: white;
+  background-color: #327DE6;
+  margin-top: 1rem;
+  height: 40px;
+  vertical-align: middle;
+  line-height: 40px;
+  border-radius: 5px;
+}
+/* Desktop Device */
+@media all and (min-width: 1025px) {
+  .no-cursor {
+    cursor: default;
+  }
+  #button-add {
+    display: none;
+  }
+  .container {
+    width: 85%;
+    margin: 0 auto;
+    padding: 20px auto;
+  }
+  .main_container {
+    margin-top: 30px;
+  }
+  header {
+    padding: 95px 0 35px;
+    background-color: #00bcd4;
+    color: white;
+  }
+  header div {
+    width: 85%;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+  header div button {
+    vertical-align: middle;
+  }
+  header div p {
+    font-size: 40px;
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  #submit_btn {
+    display: inline-block;
+    width: auto;
+  }
+  .form {
+    text-align: inherit;
+    margin-bottom: 30px;
+  }
+  .form .form-control {
+    -webkit-box-shadow: none;
+    border-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-width: 0 0 2px 0;
+    box-shadow: none;
+    width: 190px;
+    display: inline-block;
+    margin-right: 3px;
+  }
+  .form input:nth-child(3) {
+    width: 350px;
+    display: inline-block;
+  }
+  .form .select {
+    padding-left: 10px;
+    width: 150px;
+    border: 2px solid #ccc;
+  }
+  .form .select:focus {
+    border-color: #66afe9;
+  }
+  .contents tr {
+    text-align: left;
+    height: 50px;
+    line-height: 50px;
+  }
+  .contents tr td {
+    line-height: inherit;
+    padding: 0;
+  }
+  .contents tr td:first-child {
+    width: 10%;
+    text-align: center;
+  }
+  .contents tr td:nth-child(2) {
+    padding-left: 2%;
+    width: 20%;
+  }
+  .contents tr td:nth-child(3) {
+    width: 20%;
+  }
+  .contents tr td:nth-child(4) {
+    width: 35%;
+    display: table-cell;
+  }
+  .removable-pc {
+    border: 2px solid black;
+    cursor: pointer;
+    text-align: center;
+    font-size: 15px;
+    margin-top: 1rem;
+    height: 40px;
+    vertical-align: middle;
+    line-height: 40px;
+    border-radius: 5px;
+  }
+}

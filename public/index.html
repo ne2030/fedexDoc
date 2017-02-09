@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fedex Doc</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./style/bootstrap.min.css">
+    <link rel="stylesheet" href="./index.css" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Weather PWA">
+    <link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
+    <meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#2F3BA2">
+    <script src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
+    <script src="./js/firebase.config.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  </head>
+  <body>
+    <header>
+      <div>
+        <p> 모두의 딜리버리 </p>
+        <button id="btn-manage" class="btn btn-sm btn-danger"> 관리 </button>
+        <button id="btn-add" class="btn btn-sm btn-success"> 추가 </button>
+      </div>
+    </header>
+
+    <div class="main_container">
+      <!-- <div class="_header">
+         <div> 모두의 딜리버리 </div> <button id="btn-manage" class="btn btn-xs btn-danger"> 관리 </button>
+      </div> -->
+
+      <div class="container" id="basic_container">
+        <form class="form" id="form">
+          <input class="form-control" type="text" placeholder="장소" />
+          <input class="form-control" type="text" placeholder="사람" />
+          <input class="form-control" type="text" placeholder="(옵션) 내용" />
+          <select class="form-control select" name="type" id="deliveryType">
+            <option value="recieve" selected="selected">받기</option>
+            <option value="send">보내기</option>
+          </select>
+          <select class="form-control select" name="date" id="postDate">
+            <option value="today" selected="selected">오늘</option>
+            <option value="tomorrow">내일</option>
+          </select>
+          <div id="submit_btn" class="btn btn-primary btn-sm" style="display:none;"> 제출 </div>
+        </form>
+        <div class="today_doc">
+          <div class="list_title"> 오늘 </div>
+          <table class="table content-container">
+            <!-- <thead>
+              <tr>
+                <th class="th"> <span> 위치 </span> <span class="hidden"> F </span> </th>
+                <th class="th"> 장소 </th>
+                <th class="th"> 사람 </th>
+                <th class="th"> 내용 </th>
+                <th class="th"> 완료 </th>
+              </tr>
+            </thead> -->
+            <tbody id='today_contents' class="contents">
+              <tr>
+                <td class="center" colspan="6"> 할 일이 없습니다!! </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tomorrow_doc">
+          <div class="list_title"> 내일 </div>
+          <table class="table content-container">
+            <!-- <thead>
+              <tr>
+                <th class="th"> <span> 위치 </span> <span class="hidden"> F </span> </th>
+                <th class="th"> 장소 </th>
+                <th class="th"> 사람 </th>
+                <th class="th"> 내용 </th>
+                <th class="th"> 완료 </th>
+              </tr>
+            </thead> -->
+            <tbody id='tomorrow_contents' class="contents">
+              <tr>
+                <td class="center" colspan="6"> 예정된 일이 없습니다!! </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
+
+    </div>
+    <div class="container hidden" id="manage_container">
+            <div class="manage_title">오늘</div>
+            <div id="manage_today"></div>
+
+            <div class="manage_title">내일</div>
+            <div id="manage_tomorrow"><div>
+    </div>
+  </div>
+
+  <div class="loader">
+    <svg viewBox="0 0 32 32" width="32" height="32">
+      <circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
+    </svg>
+  </div>
+
+  <sciprt src="./js/modules/cache-polyfill.js"></sciprt>
+  <script>
+  let swRegistration = undefined;
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker
+             .register('/service-worker.js')
+             .then(function(swReg) {
+               console.log("Service Worker Registered");
+               swRegistration = swReg;
+             })
+             .catch(function(error) {
+               console.error('Service Worker Error', error);
+             });
+  }
+  </script>
+  <script src="./js/modules/swiped.min.js"></script>
+  <script src="./js/modules/push.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/config.js"></script>
+  <script src="./js/index.js"></script>
+  </body>
+</html>

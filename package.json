@@ -1,0 +1,26 @@
+{
+  "name": "docDelivery",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ne2030/fedexDoc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ne2030/fedexDoc/issues"
+  },
+  "homepage": "https://fedexdoc.firebaseapp.com",
+  "description": "",
+  "dependencies": {
+    "promise": "^7.1.1"
+  },
+  "devDependencies": {
+    "webpack": "^1.14.0"
+  }
+}

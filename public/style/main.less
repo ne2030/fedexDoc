@@ -1,0 +1,47 @@
+// out: ../index.css, sourcemap: false, compress: false
+
+/* All Device */
+
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body {
+  font-family: 'Apple SD Gothic Neo', 'Nanum Gothic', sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+.floor {
+  margin-top: 5px;
+}
+
+.center {
+  text-align: center;
+}
+
+.btn-danger:hover {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+
+.btn-success:hover {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.btn:focus, .btn:hover, .btn:active, .btn:active:focus {
+  outline: unset;
+}
+
+.right {
+  float: right;
+}
+
+/* Mobile Device */
+@import "./index.mobile.less";
+
+/* Desktop Device */
+@media all and (min-width: 1025px){
+    @import "./index.desktop.less";
+}
