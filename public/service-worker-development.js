@@ -4,15 +4,15 @@ importScripts('/js/modules/cache-polyfill.js');
 var dataCacheName = 'fedexData-v-5';
 var cacheName = 'fedexDoc-v-5';
 var filesToCache = [
-  '/',
-  '/index.html',
-  '/js/modules/swiped.min.js',
-  '/js/modules/cache-polyfill.js',
-  '/js/modules/push.js',
-  '/js/auth.js',
-  '/js/config.js',
-  '/js/index.js',
-  '/index.css',
+  '/'
+  // '/index.html',
+  // '/js/modules/swiped.min.js',
+  // '/js/modules/cache-polyfill.js',
+  // '/js/modules/push.js',
+  // '/js/auth.js',
+  // '/js/config.js',
+  // '/js/index.js',
+  // '/index.css',
 ];
 
 self.addEventListener('install', function(e) {

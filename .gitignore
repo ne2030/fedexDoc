@@ -10,7 +10,6 @@ coverage
 build
 
 #secrets
-/public/js/firebase.config.js
 
 # misc
 .DS_Store

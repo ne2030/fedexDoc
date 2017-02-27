@@ -4,3 +4,14 @@
     ".write": "true"
   }
 }
+/*{
+    "rules": {
+        "doc": {
+            "$date": {
+                ".write":
+            }
+        }
+        ".read": "true",
+        ".write": "true"
+    }
+}*/

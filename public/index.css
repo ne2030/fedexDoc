@@ -16,7 +16,15 @@ body {
   background-color: #d9534f;
   border-color: #d43f3a;
 }
+.btn-danger:focus {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
 .btn-success:hover {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+.btn-success:focus {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
@@ -214,6 +222,12 @@ header div p {
   .contents tr td:nth-child(4) {
     width: 35%;
     display: table-cell;
+  }
+  .manage_left {
+    width: 50%;
+  }
+  .manage_right {
+    width: 50%;
   }
   .removable-pc {
     border: 2px solid black;

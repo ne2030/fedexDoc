@@ -9,7 +9,7 @@ class FedexDoc {
         // HTLM elements
         this.inputs = document.getElementsByTagName('input');
         this.selects = document.querySelectorAll('.select');
-        this.submit_btn = document.getElementById('submit_btn')
+        this.submit_btn = document.getElementById('submit_btn');
         this.btn_manage = document.getElementById('btn-manage');
         this.btn_add = document.getElementById('btn-add');
         let form = document.getElementById('form');
@@ -22,22 +22,26 @@ class FedexDoc {
             date: 'today',
             container: document.getElementById('today_contents'),
             manage: document.getElementById('manage_today')
-        }
+        };
 
         this.tomorrow = {
             dateForm: getDateForm('tomorrow'),
             date: 'tomorrow',
             container: document.getElementById('tomorrow_contents'),
             manage: document.getElementById('manage_tomorrow')
-        }
+        };
 
-        // auth.authenticate();
+
 
         this.btn_manage.addEventListener('click', () => {
-            if (auth.isAuthenticate) {
+            if (auth.isAuthenticate()) {
                 this.manageDelivery();
             } else {
-                alert('인증된 관리자가 아닙니다');
+                auth.authenticate().then(
+                    () => {
+                        auth.isAuthenticate() ?
+                            this.manageDelivery() : alert('인증된 관리자가 아닙니다');
+                    });
             }
         });
 
@@ -56,7 +60,8 @@ class FedexDoc {
     getDateForm(isTomorrow) {
         let time = new Date();
         if (isTomorrow) {
-            time.setDate(time.getDate() + 1);
+            if (/Fri/.test(time)) { time.setDate(time.getDate() + 3);}
+            else { time.setDate(time.getDate() + 1); }
         }
         return `${time.getFullYear()} - ${time.getMonth() + 1} - ${time.getDate()}`;
     }
@@ -67,7 +72,7 @@ class FedexDoc {
                 this.filteringCache(data.val(), day.date);
                 console.log('receive data: ' + this.cache.today, this.cache.tomorrow);
                 this.showList(day);
-                if (mobile.isMobile && auth.isAuthenticate) this.spreadPushList();
+                if (mobile.isMobile && auth.isAuthenticate()) this.spreadPushList();
             } else if (this.cache[day.date]) {
                 this.cache[day.date] = undefined;
                 day.container.innerHTML = '';
@@ -91,7 +96,7 @@ class FedexDoc {
           <td> ${work['위치']} </td>
           <td> ${work['장소']} </td>
           <td> ${work['사람']} </td>
-          <td> ${work['내용']} </td>
+          <td> ${auth.isAuthenticate ? work['내용'] : 'secret'} </td>
           <td> <div id=${work.key} day=${day.date} class="btn ${isComplete ? 'btn-success' : 'btn-danger'} btn-xs"> ${isComplete ? '완료' : '미완' } </div> </td>
       `;
             day.container.appendChild(row);
@@ -102,7 +107,7 @@ class FedexDoc {
             if(!btn || !btn.classList || !btn.classList.contains('btn')) { return; }
 
             let day = btn.getAttribute('day') == 'today' ? this.today.dateForm : this.tomorrow.dateForm;
-            if (auth.isAuthenticate) {
+            if (auth.isAuthenticate()) {
                 firebase.database().ref(`/doc/${day}/${btn.id}`).update({
                     '완료': 'o'
                 });
@@ -168,7 +173,7 @@ class FedexDoc {
             if (floor.match(department)) {
                 res = floors.indexOf(floor) == 8 ? '0' : floors.indexOf(floor) + 1;
             }
-        })
+        });
         return res || -1;
     }
 
@@ -227,16 +232,14 @@ class FedexDoc {
     filteringCache(datas, date) {
         let res = [];
         for (let key in datas) {
-            res.push(Object.assign({}, datas[key], {
-                key
-            }));
+            res.push(Object.assign({}, datas[key], { key }));
         }
 
         res.sort((a, b) => {
             let floorA = parseInt(a['위치']),
                 floorB = parseInt(b['위치']);
-            if (floorA < floorB) return 1
-            else if (floorA > floorB) return -1
+            if (floorA < floorB) return 1;
+            else if (floorA > floorB) return -1;
             return a['장소'] > b['장소'] ? 1 : -1;
         });
 
@@ -267,14 +270,14 @@ class FedexDoc {
             this.cache.today.map(work => {
                 if (work['완료'] == 'o') return;
                 options = {
-                    body: work['사람'],
+                    body: work['내용'],
                     icon: 'images/icon.png',
                     badge: 'images/badge.png',
                     serviceWorker: '/service-worker.js',
                     data: this.today.dateForm,
                     tag: work.key
-                }
-                Push.create(work['장소'], options);
+                };
+                Push.create(work['장소'] + '/' + work['사람'], options);
             });
         });
     }
