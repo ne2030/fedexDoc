@@ -12,6 +12,8 @@ class FedexDoc {
         this.submit_btn = document.getElementById('submit_btn');
         this.btn_manage = document.getElementById('btn-manage');
         this.btn_add = document.getElementById('btn-add');
+        this.count = document.getElementsByClassName('count')[0];
+
         let form = document.getElementById('form');
 
         let getDateForm = this.getDateForm;
@@ -32,28 +34,29 @@ class FedexDoc {
         };
 
 
-
+        // 관리 이벤트
         this.btn_manage.addEventListener('click', () => {
-            if (auth.isAuthenticate()) {
+            // if (auth.isAuthenticate()) {
                 this.manageDelivery();
-            } else {
-                auth.authenticate().then(
-                    () => {
-                        auth.isAuthenticate() ?
-                            this.manageDelivery() : alert('인증된 관리자가 아닙니다');
-                    });
-            }
+            // } else {
+                // auth.authenticate().then(
+                //     () => {
+                //         auth.isAuthenticate() ?
+                //             this.manageDelivery() : alert('인증된 관리자가 아닙니다');
+                //     });
+            // }
         });
 
+        // hide form when mobile
         if (mobile.isMobile) form.classList.add('hidden');
         this.btn_add.addEventListener('click', () => {
             form.classList.toggle('hidden');
         });
 
-
         this.getDeliveryList(this.today);
         this.getDeliveryList(this.tomorrow);
 
+        // connect 'enter key' to 'submit'
         this.connectSubmit();
     }
 
@@ -68,11 +71,16 @@ class FedexDoc {
 
     getDeliveryList(day) {
         firebase.database().ref(`doc/${day.dateForm}`).on('value', (data) => {
+            console.log(new Date() - 0);
             if (data.val()) {
                 this.filteringCache(data.val(), day.date);
-                console.log('receive data: ' + this.cache.today, this.cache.tomorrow);
                 this.showList(day);
-                if (mobile.isMobile && auth.isAuthenticate()) this.spreadPushList();
+                this.count.innerHTML = `총 ${this.cache.today.length} 개`;
+
+                // if develop env, disable noti
+                if (/localhost/.test(document.URL)) return;
+
+                if (mobile.isMobile) this.spreadPushList();
             } else if (this.cache[day.date]) {
                 this.cache[day.date] = undefined;
                 day.container.innerHTML = '';
@@ -107,13 +115,9 @@ class FedexDoc {
             if(!btn || !btn.classList || !btn.classList.contains('btn')) { return; }
 
             let day = btn.getAttribute('day') == 'today' ? this.today.dateForm : this.tomorrow.dateForm;
-            if (auth.isAuthenticate()) {
-                firebase.database().ref(`/doc/${day}/${btn.id}`).update({
-                    '완료': 'o'
-                });
-            } else {
-                alert('목록 관리 권한이 없습니다.');
-            }
+            firebase.database().ref(`/doc/${day}/${btn.id}`).update({
+                '완료': 'o'
+            });
         });
     }
 
@@ -154,6 +158,7 @@ class FedexDoc {
             '완료': 'x',
             '타입': type
         });
+        console.log(new Date() - 0);
     }
 
     whichFloor(department) {

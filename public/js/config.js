@@ -29,7 +29,7 @@ class Mobile {
         };
         Push.create(title, options);
     }
-};
+}
 
 
 const mobile = new Mobile();
